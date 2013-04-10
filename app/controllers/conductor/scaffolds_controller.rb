@@ -15,13 +15,10 @@ module Conductor
     private
       def generator_arguments
         array = Array.new
-        array do |args|
-          args << params[:scaffold][:name]
-          args << "--skip-timestamps" if params[:scaffold][:skip_timestamps] == "1"
-          args << "--skip-migration" if params[:scaffold][:skip_migration] == "1"
-          args << params[:scaffold][:fields].select { |f| f[:name].blank? }.collect { |f| "#{f[:name]}:#{f[:type]}" }
-        end
-        return array
+        array << params[:scaffold][:name]
+        array << "--skip-timestamps" if params[:scaffold][:skip_timestamps] == "1"
+        array << "--skip-migration" if params[:scaffold][:skip_migration] == "1"
+        array << params[:scaffold][:fields].select { |f| f[:name].blank? }.collect { |f| "#{f[:name]}:#{f[:type]}" }
       end
   end
 end
